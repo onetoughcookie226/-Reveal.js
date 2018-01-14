@@ -137,8 +137,8 @@ class <mark>Navbar</mark> extends Raect.component {
 					</section>
 
 					<section>
-						<p>I have separated the navbar from the application code, so they are independent of each other. This way we can work on the navigation parts separately and make them consistent. 
-								So for example in case of error message the nav bar still displays on the page the same way.
+						<p>I have separated the <code><pre>Navbar</pre></code> from the <code><pre>App</pre></code> component class so they are independent of each other. This way we can work on the navigation parts separately and make them consistent. 
+								So for example in case of error message the <code><pre>Navbar</pre></code> still displays on the page the same way.
 						</p>
 					</section>
 					
@@ -204,7 +204,7 @@ class <mark>Navbar</mark> extends Raect.component {
 					</section>
 					
 				<section>
-					<p>Here I’m defining dislike function (event handler) as a method in the App component class. When the user click dislike button the next method is executed . 
+					<p>Here I’m defining dislike function as a method in the App component class. When the user clicks dislike button, the next method is executed. 
 					</p>
 				</section>
 
@@ -224,50 +224,87 @@ class <mark>Navbar</mark> extends Raect.component {
 
           <section data-transition="fade-in fade-out">
 							<pre><code data-trim data-noescape>
-								next() {
-									var self = this;
-									var new_index = this.state.current_index + 1;
-									if (new_index < (this.state.artists.length) - 3) {
-											axios.get(this.state.next_url)
-												.then(function (response) {
-														var new_list = self.state.artists.concat
-														(response.data.data);
-														self.setState({
-																artists: new_list,
-																next_url: response.data.next
-														});
-												})
-												.catch((err) => { });;
-									}
-									this.setState({
-											current_index: new_index,
-											active_artist: this.state.artists[new_index]
-									})
-							}
-							</code></pre>
-          </section>
+							next() {
+								var self = this;
+								var new_index = this.state.current_index + 1;
+								if (new_index < (this.state.artists.length) - 3) {
+										axios.get(this.state.<mark>next_url</mark>)
+											.then(function (response) {
+													var new_list = self.state.artists.concat
+													(response.data.data);
+													self.setState({
+															artists: new_list,
+															<mark>next_url: response.data.next</mark>
+													});
+											})
+											.catch((err) => { });;
+								}
+								this.setState({
+										current_index: new_index,
+										active_artist: this.state.artists[new_index]
+								})
+						}</code></pre>
+					</section>
+					
           <section data-transition="fade-in fade-out">
             <pre><code data-trim data-noescape>
-
+								exit() {
+									window.location.href = `${this.props.base_url}/calls/${this.props.call_id}/survey?secret=${this.props.call_secret}`;
+							}
             </code></pre>
 					</section>
 					
 					<section>
+						<pre><code data-trim data-noescape>
+								else if (this.state.active_artist === undefined) {
+									return (
+									<!-- <div className="err">
+											<Navbar  onExitClick={this.exit}/>
+											<div className="container-fluid">
+													<div className="row">
+															<div className="col-xs-12">
+																	<div>
+																			<img src={NoMoreArtistImg} />
+																	</div>
+															</div>
+													</div>
+											</div>
+									</div> -->
+									)
+							}
+						</code></pre>
+					</section>
+
+					<section>
 							<h4>Unit Testing</h4>
 					</section>
 
-				</section>
+					<section>
+						<pre><code>it('displays no artist', () => {const wrapper = shallow(<App />);
+	wrapper.setState({ active_artist: undefined });
+	expect(wrapper.find(".no-artists-message")).toBePresent();
+		}); </code></pre>
+					</section>
 
-				
+					<section>
+							<h4>Achievements</h4>
+							<ul>
+									<li>Learnt how to create wireframes, user-stries</li>
+									<li>Gained experience setting up developing environment</li>
+									<li>Practiced Scrum and Agile methodology</li>
+								</ul>
 
-				<section>
-					<h3>Achievements</h3>
-				</section>
+					</section>
 
-				<section>
-						<h3>Future Goles</h3>
-						<p>Put a data learning and automation system in place</p>
+					<section>
+							<h4>Future Goles</h3>
+							<p>Put a data learning and automation system in place</p>
 					</section>	
+
+
+				</section>
+
+			
 
 
 				<section>
